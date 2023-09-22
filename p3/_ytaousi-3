@@ -1,0 +1,14 @@
+# creating bridge
+
+/sbin/ip link add br0 type bridge
+/sbin/ip link set dev br0 up
+
+# creating vxlan
+
+/sbin/ip link add name vxlan10 type vxlan id 10 dstport 4789
+/sbin/ip link set vxlan10 up
+
+# add interface's to bridge
+
+/usr/sbin/brctl addif br0 eth1
+/usr/sbin/brctl addif br0 vxlan10
